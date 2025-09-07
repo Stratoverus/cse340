@@ -62,7 +62,7 @@ header, nav, main, footer {
 /* Header */
 header {
   background: var(--glaucous-2);
-  color: var(--white);
+  color: var(--text-dark);
   text-align: left;
   display: flex;
   align-items: center;
@@ -90,7 +90,7 @@ header {
 
 /* Navigation */
 .header-link {
-  color: var(--white);
+  color: var(--text-dark);
   background: var(--glaucous-2);
   padding: 0.25rem 0.5rem;
   border-radius: 0.3rem;
@@ -110,19 +110,19 @@ header {
 
 .header-link:hover, .header-link:focus {
   background: var(--glaucous);
-  color: var(--white);
+  color: var(--text-dark);
   text-decoration: none;
 }
 
 nav {
   background: var(--maya-blue);
-  color: var(--white);
+  color: var(--text-dark);
   margin-bottom: 1rem;
   border-radius: 0.5rem;
 }
 
 nav a {
-  color: var(--white);
+  color: var(--text-dark);
   text-decoration: none;
   margin-right: 1rem;
   font-weight: 500;
@@ -165,7 +165,7 @@ nav a:hover {
 .nav-list a {
   display: block;
   padding: 0.25rem 0.3rem;
-  color: var(--white);
+  color: var(--text-dark);
   border-radius: 0.3rem;
   font-weight: 500;
   text-decoration: none;
@@ -175,7 +175,7 @@ nav a:hover {
 
 .nav-list a:hover, .nav-list a:focus {
   background: var(--glaucous-2);
-  color: var(--white);
+  color: var(--text-dark);
 }
 
 /* Main  */
@@ -285,7 +285,7 @@ main {
 }
 
 .upgrades-grid a {
-  color: var(--glaucous-2);
+  color: var(--text-dark);
   font-weight: 500;
   text-decoration: none;
   margin-top: 0.2rem;
@@ -293,21 +293,6 @@ main {
 
 .upgrades-grid a:hover {
   text-decoration: underline;
-}
-
-button {
-  background: var(--glaucous-2);
-  color: var(--white);
-  border: none;
-  border-radius: 0.3rem;
-  padding: 0.5rem 1.2rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-button:hover {
-  background: var(--glaucous);
 }
 
 .hero-button {
@@ -338,9 +323,10 @@ button:hover {
 /* Footer */
 footer {
   background: var(--rose-quartz);
-  color: var(--white);
+  color: var(--text-dark);
   text-align: center;
   border-radius: 0.5rem;
+  font-weight: 500;
 }
 
 .copyright {
