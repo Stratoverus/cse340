@@ -95,7 +95,7 @@ header {
   padding: 0.25rem 0.5rem;
   border-radius: 0.3rem;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 800;
   font-size: 0.8rem;
   margin-right: 0.3rem;
   transition: background 0.2s, color 0.2s;
@@ -297,7 +297,7 @@ main {
 
 .hero-button {
   background: var(--maya-blue);
-  color: var(--white);
+  color: var(--text-dark);
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0.15rem 0.5rem;
