@@ -74,7 +74,6 @@ Util.buildDetailView = async function(vehicle) {
       <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors" />
     </div>
     <div class="vehicle-detail-info">
-      <h1>${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}</h1>
       <h2>${price}</h2>
       <ul>
         <li><strong>Mileage:</strong> ${miles} miles</li>

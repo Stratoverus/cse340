@@ -402,7 +402,7 @@ main {
 }
 
 .vehicle-detail-info li strong {
-  color: var(--glaucous-2);
+  color: var(--text-dark);
   font-weight: 600;
   flex: 0 0 auto;
 }
@@ -478,13 +478,13 @@ main {
 }
 
 #inv-display .namePrice h2 a {
-  color: var(--glaucous-2);
+  color: var(--text-dark);
   text-decoration: none;
   font-weight: 600;
 }
 
 #inv-display .namePrice h2 a:hover {
-  color: var(--glaucous);
+  color: var(--glaucous-2);
   text-decoration: underline;
 }
 
@@ -565,6 +565,17 @@ footer {
 .copyright {
   margin: 0;
   font-size: 0.9rem;
+}
+
+footer a {
+  color: var(--text-dark);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+footer a:hover {
+  color: var(--glaucous-2);
+  text-decoration: none;
 }
 
 /* Media Queries */
