@@ -505,6 +505,226 @@ main {
   margin: 2rem 0;
 }
 
+/* Login Form Stuffs */
+.login-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--white);
+  border-radius: 0.8rem;
+  box-shadow: var(--box-shadow-medium);
+  border: 1px solid var(--french-gray);
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--french-gray);
+  border-radius: 0.4rem;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  background: var(--white);
+  color: var(--text-dark);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus {
+  outline: none;
+  border-color: var(--glaucous-2);
+  box-shadow: 0 0 0 3px rgba(105, 135, 201, 0.15);
+}
+
+.login-btn {
+  background: var(--glaucous-2);
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 0.4rem;
+  box-shadow: var(--box-shadow-medium);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  width: 100%;
+}
+
+.login-btn:hover, .login-btn:focus {
+  background: var(--glaucous);
+  color: var(--white);
+  box-shadow: 0 4px 16px rgba(120, 128, 181, 0.25);
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--text-dark);
+  font-size: 0.9rem;
+}
+
+.signup-underline {
+  color: var(--text-dark);
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.signup-underline:hover, .signup-underline:focus {
+  color: var(--glaucous-2);
+  text-decoration: none;
+}
+
+/* Registration Form Stuffs */
+.register-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--white);
+  border-radius: 0.8rem;
+  box-shadow: var(--box-shadow-medium);
+  border: 1px solid var(--french-gray);
+}
+
+.register-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.register-form .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form input[type="password"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--french-gray);
+  border-radius: 0.4rem;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  background: var(--white);
+  color: var(--text-dark);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.register-form input[type="text"]:focus,
+.register-form input[type="email"]:focus,
+.register-form input[type="password"]:focus {
+  outline: none;
+  border-color: var(--glaucous-2);
+  box-shadow: 0 0 0 3px rgba(105, 135, 201, 0.15);
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  flex: 1;
+  margin-right: 0.5rem;
+}
+
+.password-toggle {
+  background: var(--maya-blue);
+  color: var(--text-dark);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.password-toggle:hover, .password-toggle:focus {
+  background: var(--glaucous-2);
+  color: var(--white);
+}
+
+.password-requirements {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background: rgba(188, 196, 219, 0.1);
+  border-radius: 0.4rem;
+  border-left: 4px solid var(--maya-blue);
+}
+
+.password-requirements p {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.password-requirements ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.8rem;
+  color: var(--text-dark);
+}
+
+.password-requirements li {
+  margin-bottom: 0.2rem;
+}
+
+.register-btn {
+  background: var(--glaucous-2);
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 0.4rem;
+  box-shadow: var(--box-shadow-medium);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  width: 100%;
+}
+
+.register-btn:hover, .register-btn:focus {
+  background: var(--glaucous);
+  color: var(--white);
+  box-shadow: 0 4px 16px rgba(120, 128, 181, 0.25);
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--text-dark);
+  font-size: 0.9rem;
+}
+
+.login-underline {
+  color: var(--text-dark);
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.login-underline:hover, .login-underline:focus {
+  color: var(--glaucous-2);
+  text-decoration: none;
+}
 
 /* Error Page Stuffs */
 .error-container {
@@ -551,6 +771,45 @@ main {
 .error-actions a:hover {
   background: var(--glaucous-2);
   color: var(--white);
+}
+
+/* Server Side Login errors styles */
+.error-container {
+  background: #fee;
+  border: 2px solid #dc3545;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.1);
+}
+
+.error-header {
+  color: #dc3545;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.error-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+}
+
+.error-item {
+  background: #fff;
+  color: #721c24;
+  padding: 0.5rem 0.75rem;
+  margin: 0.25rem 0;
+  border-radius: 0.25rem;
+  border-left: 4px solid #dc3545;
+  font-size: 0.95rem;
+}
+
+.error-item:before {
+  content: "• ";
+  color: #dc3545;
+  font-weight: bold;
 }
 
 /* Footer */

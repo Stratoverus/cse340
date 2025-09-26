@@ -85,6 +85,82 @@ Util.buildDetailView = async function(vehicle) {
   return html;
 }
 
+/* **************************************
+* Build the Account Login view HTML
+* ************************************ */
+Util.buildLoginView = async function() {
+  let html = `
+    <form class="login-form" action="/account/login" method="post">
+      <div class="form-group">
+        <label for="account_email">Email:</label>
+        <input type="email" id="account_email" name="account_email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="account_password">Password:</label>
+        <input type="password" id="account_password" name="account_password" required>
+      </div>
+      
+      <div class="form-group">
+        <input type="submit" value="Login" class="login-btn">
+      </div>
+    </form>
+    
+    <p class="signup-link">
+      No account? <a href="/account/register" class="signup-underline">Sign-up</a>
+    </p>
+  `;
+  return html;
+}
+
+/* **************************************
+* Build the Register view HTML
+* ************************************ */
+Util.buildRegisterView = async function() {
+  let html = `
+    <form class="register-form" action="/account/register" method="post">
+      <div class="form-group">
+        <label for="account_firstname">First Name:</label>
+        <input type="text" id="account_firstname" name="account_firstname" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="account_lastname">Last Name:</label>
+        <input type="text" id="account_lastname" name="account_lastname" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="account_email">Email Address:</label>
+        <input type="email" id="account_email" name="account_email" required placeholder="Enter a valid email address">
+      </div>
+      
+      <div class="form-group">
+        <label for="account_password">Password:</label>
+        <div class="password-container">
+          <input type="password" id="account_password" name="account_password" required pattern="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{12,}$">
+          <button type="button" class="password-toggle" id="password-toggle" onclick="togglePassword()">Show</button>
+        </div>
+        <div class="password-requirements">
+          <p>Password must be at least 12 characters and contain:</p>
+          <ul>
+            <li>At least 1 capital letter</li>
+            <li>At least 1 number</li>
+            <li>At least 1 special character</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <input type="submit" value="Register" class="register-btn">
+      </div>
+    </form>
+    
+    <p class="login-link">
+      Already have an account? <a href="/account/login" class="login-underline">Sign in</a>
+    </p>
+  `;
+  return html;
+}
 
 /* ****************************************
  * Middleware For Handling Errors

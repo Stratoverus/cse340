@@ -1,0 +1,21 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+<% if (errors) { %>
+  <div class="error-container">
+    <div class="error-header">
+      <strong>⚠️ Please fix the following errors:</strong>
+    </div>
+    <ul class="error-list">
+      <% errors.array().forEach(error => { %>
+        <li class="error-item"><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>
+
+<%- register %>
