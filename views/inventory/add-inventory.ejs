@@ -1,0 +1,177 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if(errors){ %>
+<ul class="validation-errors">
+    <% errors.array().forEach(error => { %>
+        <li class="error-item"><%= error.msg %></li>
+    <% }) %>
+</ul>
+<% } %>
+
+<div class="form-container">
+    <h2>Add New Vehicle</h2>
+    <p class="form-instructions">
+        <strong>Note:</strong> All fields are required. Please ensure all information is accurate before submitting.
+    </p>
+    
+    <!-- Testing Toggle: Needed this because of the JS validation I am trying out, and the bookmark doesn't seem to work with it -->
+    <div class="testing-controls">
+        <label>
+            <input type="checkbox" id="disableValidation"> Disable client-side validation (for testing server-side validation)
+        </label>
+    </div>
+    
+    <form action="/inv/add-inventory" method="post" id="addInventoryForm">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="classificationList">Classification:</label>
+                <%- classificationList %>
+                <span class="error-message" id="classificationError"></span>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="inv_make">Make:</label>
+                <input 
+                    type="text" 
+                    id="inv_make" 
+                    name="inv_make" 
+                    required 
+                    maxlength="30"
+                    value="<%= locals.inv_make || '' %>"
+                >
+                <span class="error-message" id="makeError"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="inv_model">Model:</label>
+                <input 
+                    type="text" 
+                    id="inv_model" 
+                    name="inv_model" 
+                    required 
+                    maxlength="30"
+                    value="<%= locals.inv_model || '' %>"
+                >
+                <span class="error-message" id="modelError"></span>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="inv_year">Year:</label>
+                <input 
+                    type="text" 
+                    id="inv_year" 
+                    name="inv_year" 
+                    required 
+                    pattern="[0-9]{4}"
+                    maxlength="4"
+                    title="Enter a valid 4-digit year"
+                    value="<%= locals.inv_year || '' %>"
+                >
+                <span class="error-message" id="yearError"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="inv_color">Color:</label>
+                <input 
+                    type="text" 
+                    id="inv_color" 
+                    name="inv_color" 
+                    required 
+                    maxlength="30"
+                    value="<%= locals.inv_color || '' %>"
+                >
+                <span class="error-message" id="colorError"></span>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="inv_price">Price ($):</label>
+                <input 
+                    type="number" 
+                    id="inv_price" 
+                    name="inv_price" 
+                    required 
+                    min="0"
+                    max="999999999"
+                    step="1"
+                    value="<%= locals.inv_price || '' %>"
+                >
+                <span class="error-message" id="priceError"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="inv_miles">Miles:</label>
+                <input 
+                    type="number" 
+                    id="inv_miles" 
+                    name="inv_miles" 
+                    required 
+                    min="0"
+                    max="999999999"
+                    step="1"
+                    value="<%= locals.inv_miles || '' %>"
+                >
+                <span class="error-message" id="milesError"></span>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="inv_description">Description:</label>
+            <textarea 
+                id="inv_description" 
+                name="inv_description" 
+                required 
+                rows="4"
+                maxlength="1000"
+            ><%= locals.inv_description || '' %></textarea>
+            <span class="error-message" id="descriptionError"></span>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="inv_image">Image Path:</label>
+                <input 
+                    type="text" 
+                    id="inv_image" 
+                    name="inv_image" 
+                    required 
+                    placeholder="/images/vehicles/no-image.png"
+                    value="<%= locals.inv_image || '/images/vehicles/no-image.png' %>"
+                >
+                <span class="error-message" id="imageError"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="inv_thumbnail">Thumbnail Path:</label>
+                <input 
+                    type="text" 
+                    id="inv_thumbnail" 
+                    name="inv_thumbnail" 
+                    required 
+                    placeholder="/images/vehicles/no-image-tn.png"
+                    value="<%= locals.inv_thumbnail || '/images/vehicles/no-image-tn.png' %>"
+                >
+                <span class="error-message" id="thumbnailError"></span>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit" class="submit-btn">Add Vehicle</button>
+        </div>
+    </form>
+    
+    <div class="form-actions">
+        <a href="/inv/" class="back-link">← Back to Management</a>
+    </div>
+</div>

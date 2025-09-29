@@ -116,22 +116,26 @@ Util.buildLoginView = async function() {
 /* **************************************
 * Build the Register view HTML
 * ************************************ */
-Util.buildRegisterView = async function() {
+Util.buildRegisterView = async function(formData = {}) {
+  const firstname = formData.account_firstname || '';
+  const lastname = formData.account_lastname || '';
+  const email = formData.account_email || '';
+  
   let html = `
     <form class="register-form" action="/account/register" method="post">
       <div class="form-group">
         <label for="account_firstname">First Name:</label>
-        <input type="text" id="account_firstname" name="account_firstname" required>
+        <input type="text" id="account_firstname" name="account_firstname" required value="${firstname}">
       </div>
       
       <div class="form-group">
         <label for="account_lastname">Last Name:</label>
-        <input type="text" id="account_lastname" name="account_lastname" required>
+        <input type="text" id="account_lastname" name="account_lastname" required value="${lastname}">
       </div>
       
       <div class="form-group">
         <label for="account_email">Email Address:</label>
-        <input type="email" id="account_email" name="account_email" required placeholder="Enter a valid email address">
+        <input type="email" id="account_email" name="account_email" required placeholder="Enter a valid email address" value="${email}">
       </div>
       
       <div class="form-group">
@@ -160,6 +164,28 @@ Util.buildRegisterView = async function() {
     </p>
   `;
   return html;
+}
+
+/* ****************************************
+ * Build Classification List for Select Element
+ **************************************** */
+Util.buildClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications()
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>'
+  classificationList += "<option value=''>Choose a Classification</option>"
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"'
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
+      classificationList += " selected "
+    }
+    classificationList += ">" + row.classification_name + "</option>"
+  })
+  classificationList += "</select>"
+  return classificationList
 }
 
 /* ****************************************

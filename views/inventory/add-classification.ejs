@@ -1,0 +1,54 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if(errors){ %>
+<ul class="validation-errors">
+    <% errors.array().forEach(error => { %>
+        <li class="error-item"><%= error.msg %></li>
+    <% }) %>
+</ul>
+<% } %>
+
+<div class="form-container">
+    <h2>Add New Classification</h2>
+    <p class="form-instructions">
+        <strong>Important:</strong> The classification name cannot contain spaces or special characters. 
+        Use only letters and numbers.
+    </p>
+    
+    <!-- Testing Toggle: Needed this because of the JS validation I am trying out, and the bookmark doesn't seem to work with it -->
+    <div class="testing-controls">
+        <label>
+            <input type="checkbox" id="disableValidation"> Disable client-side validation (for testing server-side validation)
+        </label>
+    </div>
+    
+    <form action="/inv/add-classification" method="post" id="addClassificationForm">
+        <div class="form-group">
+            <label for="classification_name">Classification Name:</label>
+            <input 
+                type="text" 
+                id="classification_name" 
+                name="classification_name" 
+                required 
+                pattern="^[a-zA-Z0-9]+$"
+                title="Only letters and numbers are allowed, no spaces or special characters"
+                value="<%= locals.classification_name || '' %>"
+            >
+            <span class="error-message" id="classificationError"></span>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit" class="submit-btn">Add Classification</button>
+        </div>
+    </form>
+    
+    <div class="form-actions">
+        <a href="/inv/" class="back-link">← Back to Management</a>
+    </div>
+</div>
