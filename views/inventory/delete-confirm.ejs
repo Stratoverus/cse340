@@ -1,0 +1,105 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if(errors){ %>
+<ul class="validation-errors">
+    <% errors.array().forEach(error => { %>
+        <li class="error-item"><%= error.msg %></li>
+    <% }) %>
+</ul>
+<% } %>
+
+<div class="form-container">
+    <h2>Delete Vehicle</h2>
+    <p class="form-instructions">
+        <strong>Confirm Deletion:</strong> Validate that this is the vehicle that you want to delete, THIS IS PERMANENT.
+    </p>
+    
+    <!-- Testing Toggle: Needed this because of the JS validation I am trying out, and the bookmark doesn't seem to work with it -->
+    <div class="testing-controls">
+        <label>
+            <input type="checkbox" id="disableValidation"> Disable client-side validation (for testing server-side validation)
+        </label>
+    </div>
+    
+    <form action="/inv/delete" method="post" id="addInventoryForm">
+       
+        <div class="form-row">
+            <div class="form-group">
+                <label for="inv_make">Make:</label>
+                <input readonly
+                    type="text" 
+                    id="inv_make" 
+                    name="inv_make" 
+                    required 
+                    maxlength="30"
+                    value="<%= locals.inv_make || '' %>"
+                >
+                <span class="error-message" id="makeError"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="inv_model">Model:</label>
+                <input readonly
+                    type="text" 
+                    id="inv_model" 
+                    name="inv_model" 
+                    required 
+                    maxlength="30"
+                    value="<%= locals.inv_model || '' %>"
+                >
+                <span class="error-message" id="modelError"></span>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="inv_year">Year:</label>
+                <input readonly
+                    type="text" 
+                    id="inv_year" 
+                    name="inv_year" 
+                    required 
+                    pattern="[0-9]{4}"
+                    maxlength="4"
+                    title="Enter a valid 4-digit year"
+                    value="<%= locals.inv_year || '' %>"
+                >
+                <span class="error-message" id="yearError"></span>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="inv_price">Price ($):</label>
+                <input readonly
+                    type="number" 
+                    id="inv_price" 
+                    name="inv_price" 
+                    required 
+                    min="0"
+                    max="999999999"
+                    step="1"
+                    value="<%= locals.inv_price || '' %>"
+                >
+                <span class="error-message" id="priceError"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="submit-btn">Delete Vehicle</button>
+            <input type="hidden" name="inv_id"
+            <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+            <% } %>>
+        </div>
+    </form>
+    
+    <div class="form-actions">
+        <a href="/inv/" class="back-link">← Back to Management</a>
+    </div>
+</div>

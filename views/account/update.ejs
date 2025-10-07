@@ -1,0 +1,89 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <div class="error-container">
+    <div class="error-header">
+      <strong>Please fix the following errors:</strong>
+    </div>
+    <ul class="error-list">
+      <% errors.array().forEach(error => { %>
+        <li class="error-item"><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>
+
+<div class="update-container">
+    <!-- Account Update Form -->
+    <div class="update-section">
+        <h2>Update Account Information</h2>
+        <form class="update-form" action="/account/update" method="post">
+            <div class="form-group">
+                <label for="account_firstname">First Name:</label>
+                <input type="text" id="account_firstname" name="account_firstname" 
+                       value="<%= locals.account_firstname %>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="account_lastname">Last Name:</label>
+                <input type="text" id="account_lastname" name="account_lastname" 
+                       value="<%= locals.account_lastname %>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="account_email">Email Address:</label>
+                <input type="email" id="account_email" name="account_email" 
+                       value="<%= locals.account_email %>" required>
+            </div>
+            
+            <input type="hidden" name="account_id" value="<%= locals.account_id %>">
+            
+            <div class="form-group">
+                <input type="submit" value="Update Account" class="update-btn">
+            </div>
+        </form>
+    </div>
+
+    <!-- Change Password Form -->
+    <div class="update-section">
+        <h2>Change Password</h2>
+        <p class="password-notice">
+            Enter a new password below to change your current password. Leave blank to keep your current password.
+        </p>
+        
+        <form class="update-form" action="/account/change-password" method="post">
+            <div class="form-group">
+                <label for="account_password">New Password:</label>
+                <div class="password-container">
+                    <input type="password" id="account_password" name="account_password" 
+                           pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':&quot;\\|,.<>\/?]).{12,}$"
+                           title="Password must be at least 12 characters with 1 capital letter, 1 number, and 1 special character">
+                    <button type="button" id="password-toggle" class="password-toggle" onclick="togglePassword()">Show</button>
+                </div>
+                <div class="password-requirements">
+                    <p>Password must be at least 12 characters and contain:</p>
+                    <ul>
+                        <li>At least 1 capital letter</li>
+                        <li>At least 1 number</li>
+                        <li>At least 1 special character</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <input type="hidden" name="account_id" value="<%= locals.account_id %>">
+            
+            <div class="form-group">
+                <input type="submit" value="Change Password" class="update-btn">
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/js/account-update.js"></script>
+

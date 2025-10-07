@@ -891,6 +891,98 @@ footer a:hover {
   color: var(--text-secondary);
 }
 
+/* Classification Select Dropdown */
+#classificationList {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.75rem;
+  margin: 1rem auto;
+  display: block;
+  border: 2px solid var(--surface);
+  border-radius: 0.4rem;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  background: var(--background);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#classificationList:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(74, 90, 149, 0.15);
+}
+
+#classificationList option {
+  padding: 0.5rem;
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+/* Inventory Display Table */
+#inventoryDisplay {
+  width: 100%;
+  margin-top: 1.5rem;
+  border-collapse: collapse;
+  background: var(--background);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: var(--box-shadow-light);
+}
+
+#inventoryDisplay thead {
+  background: var(--primary-light);
+  color: var(--text-secondary);
+}
+
+#inventoryDisplay thead th {
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+#inventoryDisplay tbody tr {
+  border-bottom: 1px solid var(--surface);
+  transition: background 0.2s;
+}
+
+#inventoryDisplay tbody tr:last-child {
+  border-bottom: none;
+}
+
+#inventoryDisplay tbody tr:hover {
+  background: rgba(188, 196, 219, 0.1);
+}
+
+#inventoryDisplay tbody td {
+  padding: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+#inventoryDisplay tbody td:first-child {
+  font-weight: 600;
+}
+
+#inventoryDisplay tbody td a {
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.3rem;
+  transition: background 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+#inventoryDisplay tbody td a:hover,
+#inventoryDisplay tbody td a:focus {
+  background: var(--secondary);
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
 /* Form Styles */
 .form-container {
   max-width: 600px;
@@ -1046,6 +1138,155 @@ footer a:hover {
 
 .testing-controls input[type="checkbox"] {
   margin-right: 0.5rem;
+}
+
+/* Account Management Stuffs */
+.account-content {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: var(--background);
+  border-radius: 0.8rem;
+  box-shadow: var(--box-shadow-medium);
+}
+
+.account-content h2 {
+  margin-bottom: 1.5rem;
+  color: var(--primary-light);
+  font-size: 1.5rem;
+}
+
+.account-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--primary-light);
+  font-size: 1.2rem;
+}
+
+.account-content p {
+  margin-bottom: 1rem;
+}
+
+.account-content a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--surface);
+  border-radius: 0.4rem;
+}
+
+.account-content a:hover,
+.account-content a:focus {
+  color: var(--primary-light);
+  background: var(--surface-accent);
+  text-decoration: underline;
+}
+
+/* Account Update Stuffs */
+.update-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.update-section {
+  background: var(--background);
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  box-shadow: var(--box-shadow-medium);
+  border: 1px solid var(--surface);
+}
+
+.update-section h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--primary-light);
+  font-size: 1.3rem;
+  border-bottom: 2px solid var(--surface);
+  padding-bottom: 0.5rem;
+}
+
+.password-notice {
+  background: rgba(188, 196, 219, 0.2);
+  padding: 0.75rem;
+  border-radius: 0.4rem;
+  border-left: 4px solid var(--secondary);
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.update-form .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.update-form .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.update-form input[type="text"],
+.update-form input[type="email"],
+.update-form input[type="password"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--surface);
+  border-radius: 0.4rem;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  background: var(--background);
+  color: var(--text-primary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.update-form input[type="text"]:focus,
+.update-form input[type="email"]:focus,
+.update-form input[type="password"]:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(74, 90, 149, 0.15);
+}
+
+.update-btn {
+  background: var(--primary);
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 0.4rem;
+  box-shadow: var(--box-shadow-medium);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  width: 100%;
+}
+
+.update-btn:hover,
+.update-btn:focus {
+  background: var(--primary-light);
+  color: var(--text-secondary);
+  box-shadow: 0 4px 16px rgba(120, 128, 181, 0.25);
+}
+
+.update-btn:disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+.update-btn:disabled:hover {
+  background: #ccc;
+  box-shadow: none;
 }
 
 /* Desktop mode */
@@ -1245,6 +1486,29 @@ footer a:hover {
     max-width: none;
   }
   
+  /* Classification Select Dropdown Desktop */
+  #classificationList {
+    max-width: 500px;
+    padding: 1rem;
+    font-size: 1.1rem;
+    margin: 1.5rem auto;
+  }
+  
+  /* Inventory Display Table Desktop */
+  #inventoryDisplay {
+    margin-top: 2rem;
+  }
+  
+  #inventoryDisplay thead th {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+  }
+  
+  #inventoryDisplay tbody td {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+  
   .form-row {
     flex-direction: row;
     gap: 1rem;
@@ -1252,5 +1516,34 @@ footer a:hover {
   
   .form-row .form-group {
     margin-bottom: 0;
+  }
+
+  /* Account Management Big */
+  .account-content {
+    padding: 2.5rem;
+  }
+
+  .account-content h2 {
+    font-size: 2rem;
+  }
+
+  .account-content h3 {
+    font-size: 1.5rem;
+  }
+
+  /* Account Update Big */
+  .update-container {
+    flex-direction: row;
+    gap: 2rem;
+    max-width: 1200px;
+  }
+
+  .update-section {
+    flex: 1;
+    padding: 2rem;
+  }
+
+  .update-section h2 {
+    font-size: 1.5rem;
   }
 }
