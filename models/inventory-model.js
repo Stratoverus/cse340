@@ -164,4 +164,88 @@ async function deleteInventory(
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryById, getClassificationById, addClassification, addInventory, updateInventory, deleteInventory};
+/* ***************************
+ *  Get all classifications with vehicle counts
+ * ************************** */
+async function getAllClassificationsWithCount() {
+  try {
+    const sql = `
+      SELECT 
+        c.classification_id,
+        c.classification_name,
+        COUNT(i.inv_id) as vehicle_count
+      FROM public.classification c
+      LEFT JOIN public.inventory i ON c.classification_id = i.classification_id
+      GROUP BY c.classification_id, c.classification_name
+      ORDER BY c.classification_name
+    `
+    const data = await pool.query(sql)
+    return data.rows
+  } catch (error) {
+    console.error("getAllClassificationsWithCount error: " + error)
+    return []
+  }
+}
+
+/* ***************************
+ *  Update classification
+ * ************************** */
+async function updateClassification(classification_id, classification_name) {
+  try {
+    const sql = `
+      UPDATE public.classification 
+      SET classification_name = $1 
+      WHERE classification_id = $2 
+      RETURNING *
+    `
+    const data = await pool.query(sql, [classification_name, classification_id])
+    return data.rows[0]
+  } catch (error) {
+    console.error("updateClassification error: " + error)
+    return false
+  }
+}
+
+/* ***************************
+ *  Delete classification
+ * ************************** */
+async function deleteClassification(classification_id) {
+  try {
+    const sql = "DELETE FROM public.classification WHERE classification_id = $1"
+    const data = await pool.query(sql, [classification_id])
+    return data.rowCount
+  } catch (error) {
+    console.error("deleteClassification error: " + error)
+    return false
+  }
+}
+
+/* ***************************
+ *  Check if classification has vehicles
+ * ************************** */
+async function classificationHasVehicles(classification_id) {
+  try {
+    const sql = "SELECT COUNT(*) as count FROM public.inventory WHERE classification_id = $1"
+    const data = await pool.query(sql, [classification_id])
+    return parseInt(data.rows[0].count) > 0
+  } catch (error) {
+     // Going to assume it has vehicles if error, just in case. I feel it's safer. :P
+    console.error("classificationHasVehicles error: " + error)
+    return true
+  }
+}
+
+module.exports = {
+  getClassifications, 
+  getInventoryByClassificationId, 
+  getInventoryById, 
+  getClassificationById, 
+  addClassification, 
+  addInventory, 
+  updateInventory, 
+  deleteInventory,
+  getAllClassificationsWithCount,
+  updateClassification,
+  deleteClassification,
+  classificationHasVehicles
+};

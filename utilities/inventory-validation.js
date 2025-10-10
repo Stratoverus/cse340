@@ -227,4 +227,61 @@ validate.checkUpdateData = async (req, res, next) => {
   next()
 }
 
+/*  **********************************
+ *  Classification Update Validation Rules
+ * ********************************* */
+validate.classificationUpdateRules = () => {
+  return [
+    // Classification ID must be valid
+    body("classification_id")
+      .trim()
+      .isInt({ min: 1 })
+      .withMessage("Invalid classification ID."),
+    
+    // Classification name is required and must be a string
+    body("classification_name")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Classification name is required.")
+      .matches(/^[a-zA-Z0-9]+$/)
+      .withMessage("Classification name cannot contain spaces or special characters.")
+      .isLength({ min: 2, max: 30 })
+      .withMessage("Classification name must be between 2 and 30 characters.")
+      .custom(async (classification_name, { req }) => {
+        // Check if classification already exists (excluding current one)
+        const classifications = await invModel.getClassifications()
+        const exists = classifications.rows.some(
+          classification => 
+            classification.classification_name.toLowerCase() === classification_name.toLowerCase() &&
+            classification.classification_id !== parseInt(req.body.classification_id)
+        )
+        if (exists) {
+          throw new Error("Classification already exists. Please choose a different name.")
+        }
+        return true
+      }),
+  ]
+}
+
+/* ******************************
+ * Check classification update data and return errors or continue
+ * ***************************** */
+validate.checkClassificationUpdateData = async (req, res, next) => {
+  const { classification_id, classification_name } = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("inventory/edit-classification", {
+      errors,
+      title: "Edit Classification",
+      nav,
+      classification_id,
+      classification_name,
+    })
+    return
+  }
+  next()
+}
+
 module.exports = validate

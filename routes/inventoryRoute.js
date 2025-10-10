@@ -9,12 +9,15 @@ const invValidation = require("../utilities/inventory-validation")
 // Route to build inventory management view
 router.get("/", utilities.checkAccountType, utilities.handleErrors(invController.buildManagementView));
 
-// Route to build add classification view
-router.get("/add-classification", utilities.checkAccountType, utilities.handleErrors(invController.buildAddClassificationView));
+// Route to build vehicle management view
+router.get("/manage-vehicles", utilities.checkAccountType, utilities.handleErrors(invController.buildManageVehiclesView));
 
-// Route to process add classification form
+// Route to build add classification view (Admin only)
+router.get("/add-classification", utilities.checkAdminType, utilities.handleErrors(invController.buildAddClassificationView));
+
+// Route to process add classification form (Admin only)
 router.post("/add-classification", 
-    utilities.checkAccountType,
+    utilities.checkAdminType,
     invValidation.classificationRules(),
     invValidation.checkClassificationData,
     utilities.handleErrors(invController.addClassification)
@@ -51,5 +54,25 @@ router.get("/delete/:inv_id", utilities.checkAccountType, utilities.handleErrors
 
 // Route to process the delete
 router.post("/delete", utilities.checkAccountType, utilities.handleErrors(invController.deleteInventory))
+
+// Route to build manage classifications view (Admin only)
+router.get("/manage-classifications", utilities.checkAdminType, utilities.handleErrors(invController.buildManageClassificationsView));
+
+// Route to build edit classification view (Admin only)
+router.get("/edit-classification/:classification_id", utilities.checkAdminType, utilities.handleErrors(invController.buildEditClassificationView));
+
+// Route to build delete classification confirmation view (Admin only)
+router.get("/delete-classification/:classification_id", utilities.checkAdminType, utilities.handleErrors(invController.buildDeleteClassificationView));
+
+// Route to process update classification (Admin only)
+router.post("/update-classification", 
+    utilities.checkAdminType,
+    invValidation.classificationUpdateRules(),
+    invValidation.checkClassificationUpdateData,
+    utilities.handleErrors(invController.updateClassification)
+);
+
+// Route to process delete classification (Admin only)
+router.post("/delete-classification", utilities.checkAdminType, utilities.handleErrors(invController.deleteClassification));
 
 module.exports = router;

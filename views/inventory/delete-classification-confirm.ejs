@@ -1,0 +1,64 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if(errors){ %>
+<ul class="validation-errors">
+    <% errors.array().forEach(error => { %>
+        <li class="error-item"><%= error.msg %></li>
+    <% }) %>
+</ul>
+<% } %>
+
+<div class="form-container">
+    <h2>Delete Classification</h2>
+    <p class="form-instructions">
+        <strong>Confirm Deletion:</strong> Validate that this is the classification you want to delete. THIS IS PERMANENT.
+    </p>
+    
+    <% if (vehicle_count > 0) { %>
+        <div class="error-notice">
+            <p><strong>Cannot Delete:</strong> This classification has <%= vehicle_count %> vehicle(s). Please remove all vehicles from this classification before deleting it.</p>
+        </div>
+        
+        <div class="form-actions">
+            <a href="/inv/manage-classifications" class="back-link">← Back to Manage Classifications</a>
+        </div>
+    <% } else { %>
+        <form action="/inv/delete-classification" method="post" id="deleteClassificationForm">
+            <div class="form-group">
+                <label for="classification_name">Classification Name:</label>
+                <input 
+                    readonly
+                    type="text" 
+                    id="classification_name" 
+                    name="classification_name" 
+                    value="<%= classification_name %>"
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="vehicle_count">Number of Vehicles:</label>
+                <input 
+                    readonly
+                    type="text" 
+                    id="vehicle_count" 
+                    value="<%= vehicle_count %>"
+                >
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="submit-btn delete-btn">Delete Classification</button>
+                <input type="hidden" name="classification_id" value="<%= classification_id %>">
+            </div>
+        </form>
+        
+        <div class="form-actions">
+            <a href="/inv/manage-classifications" class="back-link">← Cancel and Go Back</a>
+        </div>
+    <% } %>
+</div>

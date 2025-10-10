@@ -8,8 +8,20 @@ const invCont = {}
  * ************************** */
 invCont.buildManagementView = async function (req, res, next) {
   let nav = await utilities.getNav()
-  const classificationSelect = await utilities.buildClassificationList()
   res.render("./inventory/management", {
+    title: "Inventory Management",
+    nav,
+    errors: null,
+  })
+}
+
+/* ***************************
+ *  Build vehicle management view
+ * ************************** */
+invCont.buildManageVehiclesView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const classificationSelect = await utilities.buildClassificationList()
+  res.render("./inventory/manage-vehicles", {
     title: "Vehicle Management",
     nav,
     classificationSelect,
@@ -39,7 +51,7 @@ invCont.addClassification = async function (req, res, next) {
   
   if (result) {
     req.flash("notice", `The ${classification_name} classification was successfully added.`)
-    return res.redirect("/inv")
+    return res.redirect("/inv/manage-classifications")
   } else {
     req.flash("notice", "Sorry, adding the classification failed.")
     res.status(501).render("./inventory/add-classification", {
@@ -352,6 +364,128 @@ invCont.deleteInventory = async function (req, res, next) {
       inv_year: itemData.inv_year,
       inv_price: itemData.inv_price
     })
+  }
+}
+
+/* ***************************
+ *  Build manage classifications view
+ * ************************** */
+invCont.buildManageClassificationsView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const classifications = await invModel.getAllClassificationsWithCount()
+  res.render("./inventory/manage-classifications", {
+    title: "Manage Classifications",
+    nav,
+    classifications,
+    errors: null,
+  })
+}
+
+/* ***************************
+ *  Build edit classification view
+ * ************************** */
+invCont.buildEditClassificationView = async function (req, res, next) {
+  const classification_id = parseInt(req.params.classification_id)
+  let nav = await utilities.getNav()
+  const classificationData = await invModel.getClassificationById(classification_id)
+  
+  // Check if classification exists
+  if (!classificationData) {
+    const error = new Error("Classification not found");
+    error.status = 404;
+    error.message = "Sorry, the classification you are looking for does not exist.";
+    throw error;
+  }
+  
+  res.render("./inventory/edit-classification", {
+    title: "Edit " + classificationData.classification_name,
+    nav,
+    errors: null,
+    classification_id: classificationData.classification_id,
+    classification_name: classificationData.classification_name,
+  })
+}
+
+/* ***************************
+ *  Process update classification
+ * ************************** */
+invCont.updateClassification = async function (req, res, next) {
+  const { classification_id, classification_name } = req.body
+  
+  const updateResult = await invModel.updateClassification(
+    parseInt(classification_id),
+    classification_name
+  )
+  
+  if (updateResult) {
+    req.flash("notice", `The ${classification_name} classification was successfully updated.`)
+    return res.redirect("/inv/manage-classifications")
+  } else {
+    req.flash("notice", "Sorry, the update failed.")
+    let nav = await utilities.getNav()
+    res.status(501).render("./inventory/edit-classification", {
+      title: "Edit Classification",
+      nav,
+      errors: null,
+      classification_id,
+      classification_name,
+    })
+  }
+}
+
+/* ***************************
+ *  Build delete classification confirmation view
+ * ************************** */
+invCont.buildDeleteClassificationView = async function (req, res, next) {
+  const classification_id = parseInt(req.params.classification_id)
+  let nav = await utilities.getNav()
+  const classificationData = await invModel.getClassificationById(classification_id)
+  
+  // Check if classification exists
+  if (!classificationData) {
+    const error = new Error("Classification not found");
+    error.status = 404;
+    error.message = "Sorry, the classification you are looking for does not exist.";
+    throw error;
+  }
+  
+  // Get vehicle count
+  const classifications = await invModel.getAllClassificationsWithCount()
+  const classification = classifications.find(c => c.classification_id === classification_id)
+  const vehicle_count = classification ? parseInt(classification.vehicle_count) : 0
+  
+  res.render("./inventory/delete-classification-confirm", {
+    title: "Delete " + classificationData.classification_name,
+    nav,
+    errors: null,
+    classification_id: classificationData.classification_id,
+    classification_name: classificationData.classification_name,
+    vehicle_count: vehicle_count,
+  })
+}
+
+/* ***************************
+ *  Process delete classification
+ * ************************** */
+invCont.deleteClassification = async function (req, res, next) {
+  const { classification_id } = req.body
+  
+  // Check if classification has vehicles
+  const hasVehicles = await invModel.classificationHasVehicles(parseInt(classification_id))
+  
+  if (hasVehicles) {
+    req.flash("notice", "Cannot delete classification. Please remove all vehicles from this classification first.")
+    return res.redirect("/inv/manage-classifications")
+  }
+  
+  const deleteResult = await invModel.deleteClassification(parseInt(classification_id))
+  
+  if (deleteResult) {
+    req.flash("notice", "The classification was successfully deleted.")
+    return res.redirect("/inv/manage-classifications")
+  } else {
+    req.flash("notice", "Sorry, the delete failed.")
+    return res.redirect("/inv/manage-classifications")
   }
 }
 

@@ -869,11 +869,13 @@ footer a:hover {
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
+  margin: 2rem 0;
 }
 
 .management-link {
-  display: inline-block;
-  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 2rem;
   background: var(--primary);
   color: var(--text-secondary);
   text-decoration: none;
@@ -881,14 +883,42 @@ footer a:hover {
   font-weight: bold;
   text-align: center;
   width: 100%;
-  max-width: 300px;
-  transition: background-color 0.3s ease;
+  max-width: 400px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .management-link:hover {
   background: var(--primary-light);
   text-decoration: none;
   color: var(--text-secondary);
+  transform: translateY(-2px);
+}
+
+.management-link .link-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.management-link .link-description {
+  font-size: 0.9rem;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+/* Management Actions - for action buttons separate from navigation */
+.management-actions {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.management-actions .management-link {
+  display: inline-block;
+  max-width: none;
+  width: auto;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  white-space: nowrap;
 }
 
 /* Classification Select Dropdown */
@@ -967,20 +997,172 @@ footer a:hover {
 }
 
 #inventoryDisplay tbody td a {
-  color: var(--secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
   text-decoration: none;
   font-weight: 600;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.3rem;
-  transition: background 0.2s, color 0.2s;
+  font-size: 0.85rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
   display: inline-block;
+  background: var(--primary);
+  color: var(--text-secondary);
+}
+
+#inventoryDisplay tbody td a.edit-link {
+  background: var(--primary);
+  color: var(--text-secondary);
+}
+
+#inventoryDisplay tbody td a.edit-link:hover {
+  background: var(--primary-light);
+  text-decoration: none;
+}
+
+#inventoryDisplay tbody td a.delete-link {
+  background: #d9534f;
+  color: var(--text-secondary);
+}
+
+#inventoryDisplay tbody td a.delete-link:hover {
+  background: #c9302c;
+  text-decoration: none;
+}
+
+#inventoryDisplay tbody td a:active {
+  transform: scale(0.98);
 }
 
 #inventoryDisplay tbody td a:hover,
 #inventoryDisplay tbody td a:focus {
-  background: var(--secondary);
   color: var(--text-secondary);
   text-decoration: none;
+}
+
+/* Classification Management Table */
+.table-container {
+  overflow-x: auto;
+  margin: 2rem 0;
+}
+
+.classification-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--background);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: var(--box-shadow-light);
+}
+
+.classification-table thead {
+  background: var(--primary-light);
+  color: var(--text-secondary);
+}
+
+.classification-table thead th {
+  padding: 1rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.classification-table tbody tr {
+  border-bottom: 1px solid var(--surface);
+  transition: background 0.2s;
+}
+
+.classification-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.classification-table tbody tr:hover {
+  background: rgba(188, 196, 219, 0.1);
+}
+
+.classification-table tbody td {
+  padding: 1rem 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.classification-table .classification-name {
+  font-weight: 600;
+  color: var(--primary-light);
+}
+
+.classification-table .vehicle-count {
+  text-align: center;
+  font-weight: 500;
+}
+
+.classification-table .actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  display: inline-block;
+  background: var(--primary);
+  color: var(--text-secondary);
+}
+
+.action-btn:active {
+  transform: scale(0.98);
+}
+
+.action-btn:hover {
+  background: var(--primary-light);
+  text-decoration: none;
+  color: var(--text-secondary);
+}
+
+.edit-btn {
+  background: var(--primary);
+  color: var(--text-secondary);
+}
+
+.edit-btn:hover {
+  background: var(--primary-light);
+  text-decoration: none;
+  color: var(--text-secondary);
+}
+
+.delete-btn {
+  background: #d9534f;
+  color: var(--text-secondary);
+}
+
+.delete-btn:hover {
+  background: #c9302c;
+  text-decoration: none;
+  color: var(--text-secondary);
+}
+
+.delete-disabled {
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  background: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  display: inline-block;
+}
+
+.delete-form {
+  display: inline;
+  margin: 0;
 }
 
 /* Form Styles */
@@ -1052,6 +1234,20 @@ footer a:hover {
   font-size: 0.875rem;
   margin-top: 0.25rem;
   display: block;
+}
+
+.error-notice {
+  background: #f8d7da;
+  border: 2px solid #dc3545;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+}
+
+.error-notice p {
+  color: #721c24;
+  margin: 0;
+  font-weight: 600;
 }
 
 .submit-btn {
@@ -1144,16 +1340,30 @@ footer a:hover {
 .account-content {
   max-width: 600px;
   margin: 2rem auto;
-  padding: 1.5rem;
+  padding: 2rem;
   background: var(--background);
   border-radius: 0.8rem;
   box-shadow: var(--box-shadow-medium);
 }
 
 .account-content h2 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   color: var(--primary-light);
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.account-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.account-actions .management-link {
+  width: 100%;
+  max-width: 400px;
 }
 
 .account-content h3 {
@@ -1167,7 +1377,7 @@ footer a:hover {
   margin-bottom: 1rem;
 }
 
-.account-content a {
+.account-content a:not(.management-link) {
   color: var(--primary);
   text-decoration: none;
   font-weight: 600;
@@ -1178,8 +1388,8 @@ footer a:hover {
   border-radius: 0.4rem;
 }
 
-.account-content a:hover,
-.account-content a:focus {
+.account-content a:not(.management-link):hover,
+.account-content a:not(.management-link):focus {
   color: var(--primary-light);
   background: var(--surface-accent);
   text-decoration: underline;
@@ -1506,6 +1716,17 @@ footer a:hover {
   
   #inventoryDisplay tbody td {
     padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  /* Classification Table Desktop */
+  .classification-table thead th {
+    padding: 1.2rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .classification-table tbody td {
+    padding: 1.2rem 1.5rem;
     font-size: 1rem;
   }
   

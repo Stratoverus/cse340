@@ -243,6 +243,24 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
+/* ****************************************
+ *  Check Admin Type (Admin only)
+ * ************************************ */
+ Util.checkAdminType = (req, res, next) => {
+  if (res.locals.loggedin && res.locals.accountData) {
+    const accountType = res.locals.accountData.account_type
+    if (accountType === 'Admin') {
+      next()
+    } else {
+      req.flash("notice", "You must be an admin to access this page.")
+      return res.redirect("/account/login")
+    }
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
+
 
 /* ****************************************
  * Middleware For Handling Errors

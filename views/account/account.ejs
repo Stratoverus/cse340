@@ -9,14 +9,21 @@
 <div class="account-content">
     <h2>Welcome <%= locals.accountData.account_firstname %></h2>
     
-    <p>
-        <a href="/account/update/<%= locals.accountData.account_id %>" title="Update your account information">Update Account Information</a>
-    </p>
-    
-    <% if (locals.accountData.account_type === 'Employee' || locals.accountData.account_type === 'Admin') { %>
-        <h3>Inventory Management</h3>
-        <p>
-            <a href="/inv/" title="Manage inventory">Manage Inventory</a>
-        </p>
-    <% } %>
+    <div class="account-actions">
+        <a href="/account/update/<%= locals.accountData.account_id %>" 
+           class="management-link" 
+           title="Update your account information">
+            <span class="link-title">Update Account Information</span>
+            <span class="link-description">Modify your personal details</span>
+        </a>
+        
+        <% if (locals.accountData.account_type === 'Employee' || locals.accountData.account_type === 'Admin') { %>
+            <a href="/inv/" 
+               class="management-link" 
+               title="Manage inventory">
+                <span class="link-title">Manage Inventory</span>
+                <span class="link-description">Add, edit, or delete vehicles and classifications</span>
+            </a>
+        <% } %>
+    </div>
 </div>

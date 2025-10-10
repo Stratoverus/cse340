@@ -1,0 +1,62 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<div class="management-container">
+    <h2>Classification Management</h2>
+    <p>Manage all vehicle classifications below. You can edit classification names or delete classifications that have no vehicles.</p>
+    
+    <% if (classifications && classifications.length > 0) { %>
+        <div class="table-container">
+            <table class="classification-table">
+                <thead>
+                    <tr>
+                        <th>Classification Name</th>
+                        <th>Vehicle Count</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% classifications.forEach(function(classification) { %>
+                        <tr>
+                            <td class="classification-name">
+                                <%= classification.classification_name %>
+                            </td>
+                            <td class="vehicle-count">
+                                <%= classification.vehicle_count %>
+                            </td>
+                            <td class="actions">
+                                <a href="/inv/edit-classification/<%= classification.classification_id %>" 
+                                   class="action-btn edit-btn" 
+                                   title="Edit <%= classification.classification_name %>">
+                                    Edit
+                                </a>
+                                <a href="/inv/delete-classification/<%= classification.classification_id %>" 
+                                   class="action-btn delete-btn" 
+                                   title="Delete <%= classification.classification_name %>">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    <% } else { %>
+        <p class="notice">No classifications found. <a href="/inv/add-classification">Add a new classification</a> to get started.</p>
+    <% } %>
+    
+    <div class="management-actions">
+        <a href="/inv/add-classification" class="management-link">
+            Add New Classification
+        </a>
+    </div>
+    
+    <div class="form-actions">
+        <a href="/inv/" class="back-link">← Back to Inventory Management</a>
+    </div>
+</div>
